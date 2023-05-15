@@ -36,5 +36,5 @@ The application is a augmented reality tool that utilizes the Microsoft HoloLens
 7. Then go to `Debug > Start Without Debugging` to deploy the application.
 8. Done!
 
-## Demo -->
+## Demo
 <img src="/Demo/HL2_UR5_PnP.gif" width="720">
