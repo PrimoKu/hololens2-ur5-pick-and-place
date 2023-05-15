@@ -209,8 +209,6 @@ public class MainController : MonoBehaviour
         foreach (var marker in markers)
         {
             TransformUnityCamera = ArUcoUtils.GetTransformInUnityCamera(ArUcoUtils.Vec3FromFloat3(marker.Position), ArUcoUtils.RotationQuatFromRodrigues(ArUcoUtils.Vec3FromFloat3(marker.Rotation)));
-            // var mp = ArUcoUtils.GetVectorFromMatrix(TransformUnityCamera);
-            // var mr = ArUcoUtils.GetQuatFromMatrix(TransformUnityCamera); 
 
             markerPosition = ArUcoUtils.Vec3FromFloat3(marker.Position);
             markerRotation = ArUcoUtils.RotationQuatFromRodrigues(ArUcoUtils.Vec3FromFloat3(marker.Rotation));
@@ -218,13 +216,10 @@ public class MainController : MonoBehaviour
             CameraToWorldUnity = GetViewToUnityTransform(_frameCoordinateSystem);
             TransformUnityWorld = CameraToWorldUnity * TransformUnityCamera;
 
-            // StatusBlock.text = $"Detected marker ID: {marker.Id} \n Position: {ArUcoUtils.GetVectorFromMatrix(TransformUnityWorld)} \n Rotation: {ArUcoUtils.GetQuatFromMatrix(TransformUnityWorld)} ";
             TmarkerPosition = ArUcoUtils.GetVectorFromMatrix(TransformUnityWorld);
             TmarkerRotation = ArUcoUtils.GetQuatFromMatrix(TransformUnityWorld);
 
             cube.transform.SetPositionAndRotation(TmarkerPosition, TmarkerRotation);
-            // StatusBlock.text = $"Position: {TmarkerPosition.x}, {TmarkerPosition.y}, {TmarkerPosition.z}";
-            // StatusBlock.text = $"APosition: {markerPosition.x}, {markerPosition.y}, {markerPosition.z}\n TPosition: {mp.x}, {mp.y}, {mp.z}\n CPosition: {TmarkerPosition.x}, {TmarkerPosition.y}, {TmarkerPosition.z}";
             cube.transform.GetComponent<Renderer>().enabled = true;
         }
 
@@ -246,9 +241,6 @@ public class MainController : MonoBehaviour
         var viewToCamera = Matrix4x4.identity;
         var cameraToUnity = ArUcoUtils.Mat4x4FromFloat4x4(cameraToUnityRef.Value);
         var LfcameraToUnity = ArUcoUtils.Mat4x4FromFloat4x4(LfcameraToUnityRef.Value);
-
-        // StatusBlock.text = $"{LfcameraToUnity[0,0]}, {LfcameraToUnity[0,1]}, {LfcameraToUnity[0,2]}, {LfcameraToUnity[0,3]}\n{LfcameraToUnity[1,0]}, {LfcameraToUnity[1,1]}, {LfcameraToUnity[1,2]}, {LfcameraToUnity[1,3]}\n{LfcameraToUnity[2,0]}, {LfcameraToUnity[2,1]}, {LfcameraToUnity[2,2]}, {LfcameraToUnity[2,3]}\n{LfcameraToUnity[3,0]}, {LfcameraToUnity[3,1]}, {LfcameraToUnity[3,2]}, {LfcameraToUnity[3,3]}\n";
-        // TCPStatus.text = $"{cameraToUnity[0,0]}, {cameraToUnity[0,1]}, {cameraToUnity[0,2]}, {cameraToUnity[0,3]}\n{cameraToUnity[1,0]}, {cameraToUnity[1,1]}, {cameraToUnity[1,2]}, {cameraToUnity[1,3]}\n{cameraToUnity[2,0]}, {cameraToUnity[2,1]}, {cameraToUnity[2,2]}, {cameraToUnity[2,3]}\n{cameraToUnity[3,0]}, {cameraToUnity[3,1]}, {cameraToUnity[3,2]}, {cameraToUnity[3,3]}\n";
 
         var viewToUnityWinRT = viewToCamera * cameraToUnity;
         var viewToUnity = Matrix4x4.Transpose(viewToUnityWinRT);

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-//using System.Runtime.Serialization.Formatters.Binary;
 #if WINDOWS_UWP
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
@@ -18,7 +17,6 @@ public class TcpClient : MonoBehaviour
     public Text TCPStatus;
     public MainController mainController;
     private PoseMsg pose;
-    // private bool pnp_mode = true;
 
     #region Unity Functions
 
@@ -48,14 +46,6 @@ public class TcpClient : MonoBehaviour
         get { return connected; }
     }
 
-//     void Update() {
-// #if WINDOWS_UWP
-//         if(!pnp_mode) {
-//             SendPickPoseMsg();
-//         }
-// #endif
-//     }
-
 #if WINDOWS_UWP
     StreamSocket socket = null;
     public DataWriter dw;
@@ -81,7 +71,7 @@ public class TcpClient : MonoBehaviour
         }
         catch (Exception ex)
         {
-            // TCPStatus.text = $"Error sending: {ex}";
+            TCPStatus.text = $"Error sending: {ex}";
             SocketErrorStatus webErrorStatus = SocketError.GetStatus(ex.GetBaseException().HResult);
             Debug.Log(webErrorStatus.ToString() != "Unknown" ? webErrorStatus.ToString() : ex.Message);
         }
@@ -124,7 +114,7 @@ public class TcpClient : MonoBehaviour
         }
 
         if(pose == null) {
-            // TCPStatus.text = $"NULL Data";
+            TCPStatus.text = $"NULL Data";
             lastMessageSent = true;
             return;
         }
@@ -132,7 +122,6 @@ public class TcpClient : MonoBehaviour
         try
         {
             string message = pose.ToJson();
-            // TCPStatus.text = $"{type}:{message}";
             byte[] data = Encoding.UTF8.GetBytes(message);
             dw.WriteBytes(data);
             await dw.StoreAsync();
@@ -185,10 +174,6 @@ public class TcpClient : MonoBehaviour
         else SendString("Place");
 #endif
     }
-
-    // public void changeMode() {
-    //     pnp_mode = !pnp_mode;
-    // }
 
     #endregion
 }
