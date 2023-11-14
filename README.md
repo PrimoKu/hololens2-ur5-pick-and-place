@@ -1,4 +1,4 @@
-# HoloLens2-UR5 Pick and Plcae
+# HoloLens2-UR5 Pick and Place
 This project aims to perform "Pick and Place" task with "Universal Robot 5" by using HoloLens 2 application to determine the pick and place position. <br />
 We developed a HoloLens 2 app using Unity 3D and create TCP client that sends custom pose message to ROS2, and utilized the OpenCV library to achieve ArUco Marker detect functionality in order to perform registration between HoloLens 2 and UR5.
 
