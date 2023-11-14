@@ -37,4 +37,15 @@ The application is a augmented reality tool that utilizes the Microsoft HoloLens
 8. Done!
 
 ## Demo
-<img src="/Demo/HL2_UR5_PnP.gif" width="720">
+To watch the full demo video, please visit [HoloLens 2 Pick and Place with UR5](https://youtu.be/8-yKbps1ocE)
+### Registration
+<img src="/Demo/Registration.png" width="720">
+
+### Setting Pick Position
+<img src="/Demo/Pick.png" width="720">
+
+### Setting Place Position
+<img src="/Demo/Place.png" width="720">
+
+### Pick and Place
+<img src="/Demo/ShortPnP.gif" width="720">
