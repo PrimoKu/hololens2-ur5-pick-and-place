@@ -38,6 +38,7 @@ public class TcpClient : MonoBehaviour
 
     [SerializeField]
     string hostIPAddress, port;
+    // 10.203.137.231
 
     public Renderer ConnectionStatusLED;
     private bool connected = false;
@@ -68,6 +69,7 @@ public class TcpClient : MonoBehaviour
             dr.InputStreamOptions = InputStreamOptions.Partial;
             connected = true;
             ConnectionStatusLED.material.color = Color.green;
+            TCPStatus.text = $"Connected to Server";
         }
         catch (Exception ex)
         {
@@ -75,7 +77,6 @@ public class TcpClient : MonoBehaviour
             SocketErrorStatus webErrorStatus = SocketError.GetStatus(ex.GetBaseException().HResult);
             Debug.Log(webErrorStatus.ToString() != "Unknown" ? webErrorStatus.ToString() : ex.Message);
         }
-        TCPStatus.text = $"Connected to Server";
     }
 
     private void StopConnection()
